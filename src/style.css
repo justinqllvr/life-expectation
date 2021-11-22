@@ -1,8 +1,45 @@
-body, html, canvas {
-    margin: 0px;
-    padding: 0px;
+body {
+    display: flex;
+    margin: 0;
 }
 
- body {
-    overflow: hidden;
+#webgl {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+  }
+  .diagram {
+    display: inline-block;
+    width: 5em;
+    height: 3em;
+  }
+  .left {
+    width: 100%;
+    height: 100%;
+  }
+  .right {
+    width: 100%;
+    height: 100%;
+  }
+  .middle {
+    width: 100%;
+    height: 100%;
+  }
+
+
+  p {
+      min-width: 60vw;
+      height: 100vh;
+  }
+
+#graph {
+    color: red;
+    z-index: 0;
 }
+
