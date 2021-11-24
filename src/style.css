@@ -1,45 +1,116 @@
-body {
-    display: flex;
-    margin: 0;
+@font-face {
+    font-family: "Playfair-regular";
+    src:  url("/static/Font/PlayFair/PlayfairDisplay-Regular.ttf");
+   }
+   
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  --main-bg-color: #000000;
+  --main-color: #F6F6F6;
+  --title-color: #white;
+}
+
+.header {
+    background-color: #000000;
+    font-family: "Playfair-regular";
+    color: var(--main-color);
+    height: 100vh;
+    width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 600vh;
 }
 
 #webgl {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-    z-index: 1;
-    margin: 0;
-    padding: 0;
-  }
-  .diagram {
-    display: inline-block;
-    width: 5em;
-    height: 3em;
-  }
-  .left {
-    width: 100%;
-    height: 100%;
-  }
-  .right {
-    width: 100%;
-    height: 100%;
-  }
-  .middle {
-    width: 100%;
-    height: 100%;
-  }
-
-
-  p {
-      min-width: 60vw;
-      height: 100vh;
-  }
-
-#graph {
-    color: red;
-    z-index: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
+.diagram {
+  display: inline-block;
+}
+.left {
+  width: 50%;
+  height: 50%;
+  background-color: gray;
+  background-image: url("/static/GRILLE.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.right {
+  width: 100%;
+  height: 50%;
+}
+.middle {
+  width: 100%;
+  height: 100%;
+}
+
+.elem {
+  width: 100%;
+  height: 100vh;
+}
+
+.wrapper_content {
+    width: 100%;
+    height: 300vh;
+    display: flex;
+}
+.page {
+    height: 100vh;
+    background-color: yellow;
+}
+
+.wrapper_page {
+    height: 100%;
+    width: 40vw;
+}
+
+.wrapper_nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    width: 15vw;
+    position: sticky;
+    margin-top: 25vh;
+    top: 25vh;
+    background-color: grey;
+}
+
+.wrapper_canvas {
+    width: 30vw;
+}
+
+.wrapper_killFeed {
+    width: 15vw;
+}
+.nav {
+    height: 90%;
+    width: 5px;
+    background-color: black;
+}
+
+.nav_active {
+    width: 5px;
+    background-color: white;
+}
+
+
+
+
+
+
+
 
