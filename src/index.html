@@ -4,63 +4,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>04 - Webpack</title>
+    <title>Life expectations</title>
 </head>
 
 <body>
-    <!-- <canvas id="webgl"></canvas> -->
+    <canvas id="webgl"></canvas>
 
     <div class="header">
-        <span>GOBELINS 2021</span>
-        <span>BDDI 2022 | JUSTIN QUILLEVERE | LUDWIG pILICER | SALLY BANGOURA</span>
-        <h1>Life expectations</h1>
-        <h2>Expected lifetime of a BDDI</h2>
+        <div class="gob">
+            <span>GOBELINS 2021</span>
+            <span>BDDI 2022 | JUSTIN QUILLEVERE | LUDWIG pILICER | SALLY BANGOURA</span>
+        </div>
+        <div class="header_title">
+            <h1>Life expectations</h1>
+            <h2>Expected lifetime of a BDDI</h2>
+        </div>
+
+
     </div>
     <div class="wrapper_content">
         <div class="wrapper_nav">
             <div class="nav">
                 <div id="nav_active" class="nav_active"></div>
             </div>
-            <span class="nav_mark-0"></span>
-            <span class="nav_mark-1"></span>
-            <span class="nav_mark-2"></span>
-            <span class="nav_mark-3"></span>
-            <span class="nav_mark-4"></span>
-            <span class="nav_mark-5"></span>
+            <div class="wrapper_text">
+                <span class="nav_mark-0_text">20</span>
+                <span class="nav_mark-1_text">30</span>
+                <span class="nav_mark-2_text">40</span>
+                <span class="nav_mark-3_text">50</span>
+                <span class="nav_mark-4_text">60</span>
+                <span class="nav_mark-5_text">70</span>
+                <span class="nav_mark-6_text">80</span>
+                <span class="nav_mark-7_text">90</span>
+                <span class="nav_mark-8_text">100</span>
+            </div>
+
+
+            <span class="ball nav_mark-0"></span>
+            <span class="ball nav_mark-1"></span>
+            <span class="ball nav_mark-2"></span>
+            <span class="ball nav_mark-3"></span>
+            <span class="ball nav_mark-4"></span>
+            <span class="ball nav_mark-5"></span>
+            <span class="ball nav_mark-6"></span>
+            <span class="ball nav_mark-7"></span>
+            <span class="ball nav_mark-8"></span>
+
+
         </div>
         <div class="wrapper_page">
-            <div>
-                <div class="page page1">
+            <div class="page page1">
+                <div class="page_content">
                     <h2>Châpitre 1: Un nouveau départ</h2>
-                    <h3>l’appartement</h3>
+                    <h3>L'APPARTEMENT</h3>
                     <p>Votre bac en poche, vous êtes passez dans les études supérieures avec l’affectation dans l’école
                         de vos reves. Il ne vous manquait plus que l’appartement, tant attendu. Dans celui-ci, les fêtes
                         les plus mémorables de votre vie ont lieu. Vous êtes jeunes, vous avez une hygiène de vie plus
                         ou moins douteuse, mais vous vous en sortez très bien, enfin, pour l’instant...Pour votre
                         information, selon le sondage bddeath du lundi 22 novembre: </p>
-                    <img />
-                </div>
 
-                <div class="page page2">
-                    <span>GOBELINS 2021</span>
-                    <span>BDDI 2022 | JUSTIN QUILLEVERE | LUDWIG pILICER | SALLY BANGOURA</span>
-                    <h1>Life expectations</h1>
-                    <h2>Expected lifetime of a BDDI</h2>
+                </div>
+                <div class="stats">
+                    <div class="stats_text">
+                        <span>31% portent des chaussettes colorées</span>
+                        <span>33% fumeurs dont 75% quotidiennement</span>
+                        <span>58% font moins d’une heure de sport par semaine</span>
+                    </div>
+                    <!-- <img src=""/> -->
                 </div>
             </div>
 
+            <div class="page page2">
+                <span>GOBELINS 2021</span>
+                <span>BDDI 2022 | JUSTIN QUILLEVERE | LUDWIG pILICER | SALLY BANGOURA</span>
+                <h1>Life expectations</h1>
+                <h2>Expected lifetime of a BDDI</h2>
+            </div>
         </div>
-        <div class="wrapper_canvas">CANVAS</div>
+        <div class="wrapper_canvas">
+            <span id="box" class="grid">
+            </span>
+        </div>
         <div class="wrapper_killFeed">NOMS DES MORTS</div>
     </div>
 
     <div class="container">
-        <div class="elem">
-            <img id="grid" />
-            <img src="~/static/GRILLE.png" />
-            <span id="box" class="diagram left">
-            </span>
-        </div>
+        
         <!-- <div class="elem" style="background-color: aquamarine;" id="graph">
             <button>BOUTON</button>
             <span id="pyramid" class="diagram right"></span>
@@ -70,6 +99,6 @@
         </div> -->
     </div>
 </body>
-<script src="./script.js"></script>
+<script type="module" src="./script.js"></script>
 
 </html>

@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { Group } from "three";
+import { Group, Material, MeshMatcapMaterial } from "three";
 
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import * as dat from "lil-gui";
@@ -10,6 +10,7 @@ export class Main {
     this.renderer = new THREE.WebGLRenderer({
       canvas: this.canvas,
       alpha: true,
+      antialias: true,
     });
     this.scroll = 0;
 
@@ -31,7 +32,7 @@ export class Main {
   makeScene(elem) {
     const scene = new THREE.Scene();
 
-    const fov = 45;
+    const fov = 50;
     const aspect = 2; // the canvas default
     const near = 0.1;
     const far = 100;
@@ -63,14 +64,7 @@ export class Main {
         model = gltf.scene;
         console.log(gltf);
 
-        console.log(model);
-
-        // this.caracterFolder.add(model.position, 'x',- 3, 3, 0.01)
-        model.position.y = -2.5;
-        model.position.z = -2.2;
-        // model.children[0].children[1].material.color.r = 1;
-        // model.scale.x = 0.5;
-        // model.scale.y = 0.5;
+       
         // gltf.scene.children[0].children[1].scale.y = 0.1
 
         // const new_caracter = model.clone(true)
@@ -85,43 +79,54 @@ export class Main {
     );
 
     setTimeout(() => {
-      let developper = 0;
+      const newMaterial1 = new MeshMatcapMaterial({ color: "green" });
+      const newMaterial2 = new MeshMatcapMaterial({ color: "red" });
+      
+      let studientNumber = 0;
       for (let i = 0; i < 6; i++) {
         for (let j = 0; j < 6; j++) {
           const new_caracter = model.clone();
-          new_caracter.position.x = i * 5 - 15;
-          new_caracter.position.y = j * 5 - 15;
-          new_caracter.position.z = -30;
-          if (developper + 1 < 14) {
-            new_caracter.children[0].children[1].material.color.r = 255;
+          new_caracter.position.x = i * 6;
+          new_caracter.position.y = j * 6;
+
+          if ((studientNumber + 1 < 14)) {
+            console.log("dev : " + studientNumber)
           } else {
-            new_caracter.children[0].children[1].material.color.r = 0;
-            new_caracter.children[0].children[1].material.color.r = 20;
-
+            console.log("designer :" + studientNumber)
+            model.traverse((o) => {
+              if (o.isMesh) o.material = newMaterial1;
+            });
           }
-          console.log(developper)
-          developper++;
-          // this.caracterFolder.add(new_caracter.scale, 'x',- 3, 3, 0.01)
-          // this.caracterFolder.add(new_caracter.scale, 'y',- 3, 3, 0.01)
-          // this.caracterFolder.add(new_caracter.scale, 'z',- 3, 3, 0.01)
-
+          studientNumber++;
           caracterGroup.add(new_caracter);
         }
       }
 
-      this.caracterFolder.add(caracterGroup.position, "z", -30, 30, 0.01);
-      // this.caracterFolder.add(caracterGroup.position, 'y',- 3, 3, 0.01)
-      // this.caracterFolder.add(caracterGroup.position, 'z',- 3, 3, 0.01)
+      let scale = 1.3;
+      caracterGroup.position.x = -19.863;
+      caracterGroup.position.y = -22.321;
+      caracterGroup.position.z = -50;
+      caracterGroup.scale.x = scale;
+      caracterGroup.scale.y = scale;
+      caracterGroup.scale.z = scale;
 
-      console.log(caracterGroup);
+      // this.caracterFolder.add(caracterGroup.position, "z", -50, 50, 0.001);
+      // this.caracterFolder.add(caracterGroup.position, "x", -50, 50, 0.001);
+      // this.caracterFolder.add(caracterGroup.position, "y", -50, 50, 0.001);
+      // this.caracterFolder.add(caracterGroup.scale, "x", 1, 2, 0.01);
+      // this.caracterFolder.add(caracterGroup.scale, "y", 1, 2, 0.01);
+      // this.caracterFolder.add(caracterGroup.scale, "z", 1, 2, 0.01);
+     
+
+      // console.log(caracterGroup);
       sceneInfo.scene.add(caracterGroup);
-    }, 1000);
+    }, 500);
 
     // const geometry = new THREE.BoxGeometry(1, 1, 1);
     // const material = new THREE.MeshPhongMaterial({ color: "red" });
     // const mesh = new THREE.Mesh(geometry, material);
     // sceneInfo.scene.add(mesh);
-    // sceneInfo.mesh = mesh;
+    sceneInfo.mesh = caracterGroup;
     return sceneInfo;
   }
 
@@ -143,8 +148,6 @@ export class Main {
     sceneInfo.scene.add(mesh);
     sceneInfo.mesh = mesh;
 
-    //DEBUG
-    this.sphereFolder.add(mesh.rotation, "x", -3, 3, 0.01);
     return sceneInfo;
   }
 
@@ -208,7 +211,13 @@ export class Main {
     this.renderer.clear(true, true);
     this.renderer.setScissorTest(true);
 
+
     this.renderSceneInfo(this.sceneInfo1);
+    if(this.scroll * 100 > 50) {
+      console.log(this.sceneInfo1.mesh.children[0].position.x = 2)
+    }
+    
+
     // this.renderSceneInfo(this.sceneInfo2);
     // this.renderSceneInfo(this.sceneInfo3);
 
