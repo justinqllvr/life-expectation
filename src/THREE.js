@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { Group, Material, MeshMatcapMaterial } from "three";
+import { Group, Material, MeshMatcapMaterial, TextureLoader } from "three";
 
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import * as dat from "lil-gui";
@@ -13,6 +13,7 @@ export class Main {
       antialias: true,
     });
     this.scroll = 0;
+    this.data = null;
 
     this.gui = new dat.GUI();
     this.caracterFolder = this.gui.addFolder("Caracter");
@@ -22,11 +23,21 @@ export class Main {
     this.sceneInfo2 = this.setupScene2();
     this.sceneInfo3 = this.setupScene3();
     this.render = this.render.bind(this);
+    this.fetchData();
     this.render();
   }
 
   updateScroll(progress) {
-    this.scroll = progress;
+    this.scroll = progress * 80 + 20;
+  }
+
+  fetchData() {
+    fetch("/data.json")
+      .then((res) => res.json())
+      .then((res) => {
+        this.data = res;
+        console.log(this.data);
+      });
   }
 
   makeScene(elem) {
@@ -54,6 +65,7 @@ export class Main {
   setupScene1() {
     const sceneInfo = this.makeScene(document.querySelector("#box"));
 
+
     let model = null;
     const caracterGroup = new THREE.Group();
     const gltfLoader = new GLTFLoader();
@@ -62,13 +74,6 @@ export class Main {
       "/Character/BaseCharacter-smooth.glb_2",
       (gltf) => {
         model = gltf.scene;
-        console.log(gltf);
-
-       
-        // gltf.scene.children[0].children[1].scale.y = 0.1
-
-        // const new_caracter = model.clone(true)
-        // sceneInfo.scene.add(new_caracter);
       },
       () => {
         console.log("progress");
@@ -79,26 +84,38 @@ export class Main {
     );
 
     setTimeout(() => {
-      const newMaterial1 = new MeshMatcapMaterial({ color: "green" });
-      const newMaterial2 = new MeshMatcapMaterial({ color: "red" });
-      
+      const newMaterial1 = new MeshMatcapMaterial({
+        color: "white",
+        transparent: true,
+      });
+      const newMaterial2 = new MeshMatcapMaterial({
+        color: "grey",
+        transparent: true,
+        opacity: 0.5,
+      });
+
       let studientNumber = 0;
       for (let i = 0; i < 6; i++) {
         for (let j = 0; j < 6; j++) {
           const new_caracter = model.clone();
           new_caracter.position.x = i * 6;
           new_caracter.position.y = j * 6;
+          new_caracter.name = `thoma_${studientNumber}`;
 
-          if ((studientNumber + 1 < 14)) {
-            console.log("dev : " + studientNumber)
+          if (studientNumber + 1 < 14) {
+            // console.log("dev : " + studientNumber);
+            model.traverse((o) => {
+              if (o.isMesh) o.material = newMaterial2;
+            });
           } else {
-            console.log("designer :" + studientNumber)
+            // console.log("designer :" + studientNumber);
             model.traverse((o) => {
               if (o.isMesh) o.material = newMaterial1;
             });
           }
-          studientNumber++;
+
           caracterGroup.add(new_caracter);
+          studientNumber++;
         }
       }
 
@@ -110,57 +127,97 @@ export class Main {
       caracterGroup.scale.y = scale;
       caracterGroup.scale.z = scale;
 
-      // this.caracterFolder.add(caracterGroup.position, "z", -50, 50, 0.001);
-      // this.caracterFolder.add(caracterGroup.position, "x", -50, 50, 0.001);
-      // this.caracterFolder.add(caracterGroup.position, "y", -50, 50, 0.001);
-      // this.caracterFolder.add(caracterGroup.scale, "x", 1, 2, 0.01);
-      // this.caracterFolder.add(caracterGroup.scale, "y", 1, 2, 0.01);
-      // this.caracterFolder.add(caracterGroup.scale, "z", 1, 2, 0.01);
-     
+      this.caracterFolder.add(caracterGroup.position, "z", -50, 50, 0.001);
+      this.caracterFolder.add(caracterGroup.position, "x", -50, 50, 0.001);
+      this.caracterFolder.add(caracterGroup.position, "y", -50, 50, 0.001);
+      this.caracterFolder.add(caracterGroup.scale, "x", 1, 2, 0.01);
+      this.caracterFolder.add(caracterGroup.scale, "y", 1, 2, 0.01);
+      this.caracterFolder.add(caracterGroup.scale, "z", 1, 2, 0.01);
 
       // console.log(caracterGroup);
       sceneInfo.scene.add(caracterGroup);
+
+      // var selectedObject = sceneInfo.scene.getObjectByName(caracterGroup.children[5].name)
+
+      // console.log(
+      //   caracterGroup.children.map(
+      //     (child) => child.children[0].children[1].material.opacity
+      //   )
+      // );
     }, 500);
 
     // const geometry = new THREE.BoxGeometry(1, 1, 1);
     // const material = new THREE.MeshPhongMaterial({ color: "red" });
     // const mesh = new THREE.Mesh(geometry, material);
     // sceneInfo.scene.add(mesh);
+    // console.log(caracterGroup);
     sceneInfo.mesh = caracterGroup;
     return sceneInfo;
   }
 
   setupScene2() {
-    const sceneInfo = this.makeScene(document.querySelector("#pyramid"));
-    const radius = 0.8;
-    const widthSegments = 50;
-    const heightSegments = 10;
-    const geometry = new THREE.SphereGeometry(
-      radius,
-      widthSegments,
-      heightSegments
+    const sceneInfo = this.makeScene(document.querySelector("#black-model"));
+
+    const blackMaterial = new MeshMatcapMaterial({ color: "#797979" });
+
+    let model = null;
+    const gltfLoader = new GLTFLoader();
+
+    gltfLoader.load(
+      "/Character/BaseCharacter-smooth.glb_2",
+      (gltf) => {
+        model = gltf.scene;
+        model.position.y = -1.5;
+        model.position.z = -3;
+
+        sceneInfo.scene.add(model);
+      },
+      () => {
+        console.log("progress");
+      },
+      () => {
+        console.log("error");
+      }
     );
-    const material = new THREE.MeshPhongMaterial({
-      color: "blue",
-      flatShading: true,
-    });
-    const mesh = new THREE.Mesh(geometry, material);
-    sceneInfo.scene.add(mesh);
-    sceneInfo.mesh = mesh;
 
     return sceneInfo;
   }
 
   setupScene3() {
-    const sceneInfo = this.makeScene(document.querySelector("#sphere"));
-    const geometry = new THREE.SphereGeometry(0.8, 50, 2);
-    const material = new THREE.MeshPhongMaterial({
-      color: "yellow",
-      flatShading: true,
-    });
-    const mesh = new THREE.Mesh(geometry, material);
-    sceneInfo.scene.add(mesh);
-    sceneInfo.mesh = mesh;
+    const sceneInfo = this.makeScene(document.querySelector("#white-model"));
+
+    // const texture = new THREE.TextureLoader().load("/Textures/4.png")
+    // console.log(texture)
+    // const whiteMaterial = new MeshMatcapMaterial({
+    //   color: "white",
+    //   matcap: texture,
+    // });
+
+    let model = null;
+    const gltfLoader = new GLTFLoader();
+
+    gltfLoader.load(
+      "/Character/BaseCharacter-smooth.glb_2",
+      (gltf) => {
+        model = gltf.scene;
+        model.position.y = -1.5;
+        model.position.z = -3;
+        model.children[0].children[1].material.color.r = 5;
+        model.children[0].children[1].material.color.b = 5;
+        model.children[0].children[1].material.color.g = 5;
+        // model.traverse((o) => {
+        //   if (o.isMesh) o.material = whiteMaterial;
+        // });
+        sceneInfo.scene.add(model);
+      },
+      () => {
+        console.log("progress");
+      },
+      () => {
+        console.log("error");
+      }
+    );
+
     return sceneInfo;
   }
 
@@ -211,15 +268,57 @@ export class Main {
     this.renderer.clear(true, true);
     this.renderer.setScissorTest(true);
 
-
     this.renderSceneInfo(this.sceneInfo1);
-    if(this.scroll * 100 > 50) {
-      console.log(this.sceneInfo1.mesh.children[0].position.x = 2)
-    }
-    
 
-    // this.renderSceneInfo(this.sceneInfo2);
-    // this.renderSceneInfo(this.sceneInfo3);
+    if (this.data && this.sceneInfo1.mesh) {
+      const children = this.sceneInfo1.mesh.children;
+      let designer = 14
+      let developper = 0
+
+      if (children.length === 36) {
+        for (let i = 0; i < this.data.length; i++) {
+          if (this.scroll > this.data[i].Durée_de_vie) {
+            if(this.data[i].Role === "Designer") {
+              children[designer].scale.x = 0;
+              children[designer].scale.y = 0;
+              children[designer].scale.z = 0; 
+              designer++
+            } else if (this.data[i].Role === "Développeur") {
+              children[developper].scale.x = 0;
+              children[developper].scale.y = 0;
+              children[developper].scale.z = 0;
+              developper++
+            }
+            // children[developper].scale.x = 0;
+            // children[developper].scale.y = 0;
+            // children[developper].scale.z = 0;
+            // developper++
+            // this.sceneInfo1.mesh.remove(
+            //   children.filter((child) => child.name === `thoma_${i}`)[0]
+            // );
+          } else if (this.scroll < this.data[i].Durée_de_vie && children[i].scale.x === 0) {
+            if(this.data[i].Role === "Designer") {
+              children[designer].scale.x = 0;
+              children[designer].scale.y = 0;
+              children[designer].scale.z = 0; 
+              designer--
+            } else if (this.data[i].Role === "Développeur") {
+              // console.log("object")
+              children[developper].scale.x = 0;
+              children[developper].scale.y = 0;
+              children[developper].scale.z = 0;
+              developper--
+            }
+            children[i].scale.x = 1
+            children[i].scale.y = 1
+            children[i].scale.z = 1
+          }
+        }
+      }
+    }
+
+    this.renderSceneInfo(this.sceneInfo2);
+    this.renderSceneInfo(this.sceneInfo3);
 
     requestAnimationFrame(this.render);
   }
