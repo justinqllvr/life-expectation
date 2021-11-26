@@ -24,15 +24,13 @@ export class Main {
 
     this.test = 0;
 
-    this.deathArray = [];
-
-    this.gui = new dat.GUI();
-    this.caracterFolder = this.gui.addFolder("Caracter");
-    this.sphereFolder = this.gui.addFolder("Sphere");
+    this.pseudoDeathArray = [];
+    this.ageDeathArray = [];
 
     this.sceneInfo1 = this.setupScene1();
     this.sceneInfo2 = this.setupScene2();
     this.sceneInfo3 = this.setupScene3();
+    this.sceneInfo4 = this.setupScene4();
     this.render = this.render.bind(this);
     this.fetchData();
     this.render();
@@ -44,6 +42,10 @@ export class Main {
 
   updateScroll1(progress) {
     this.scroll1 = progress;
+  }
+
+  mouseRotation(mouseX) {
+    this.mouseX = mouseX / 1400 * 2 - 1
   }
 
   setArrayNumber(role) {
@@ -64,8 +66,12 @@ export class Main {
       ));
     }
   }
-  deathList() {
-    return this.deathArray;
+  deathList(elem) {
+    if(elem === "pseudo") {
+      return this.pseudoDeathArray;
+    } else {
+      return this.ageDeathArray;
+    }
   }
   fetchData() {
     fetch("/data.json")
@@ -79,6 +85,7 @@ export class Main {
         for (let i = 0; i < this.numberDesigner.length; i++) {
           this.data.filter((person) => person.Role === "Designer")[i].modele = this.numberDesigner[i]
         }
+        console.log(this.data)
       });
   }
 
@@ -141,6 +148,7 @@ export class Main {
           const new_caracter = model.clone();
           new_caracter.position.x = i * 6;
           new_caracter.position.y = j * 6;
+          new_caracter.rotation.y = -0.7;
           new_caracter.name = `thoma_${studientNumber}`;
 
           if (studientNumber + 1 < 14) {
@@ -166,14 +174,6 @@ export class Main {
       caracterGroup.scale.y = scale;
       caracterGroup.scale.z = scale;
 
-      this.caracterFolder.add(caracterGroup.position, "z", -60, 0, 0.001);
-      this.caracterFolder.add(caracterGroup.position, "x", -50, 50, 0.001);
-      this.caracterFolder.add(caracterGroup.position, "y", -50, 50, 0.001);
-      this.caracterFolder.add(caracterGroup.scale, "x", 1, 2, 0.01);
-      this.caracterFolder.add(caracterGroup.scale, "y", 1, 2, 0.01);
-      this.caracterFolder.add(caracterGroup.scale, "z", 1, 2, 0.01);
-
-      // console.log(caracterGroup);
       sceneInfo.scene.add(caracterGroup);
     }, 500);
 
@@ -213,13 +213,6 @@ export class Main {
   setupScene3() {
     const sceneInfo = this.makeScene(document.querySelector("#white-model"));
 
-    // const texture = new THREE.TextureLoader().load("/Textures/4.png")
-    // console.log(texture)
-    // const whiteMaterial = new MeshMatcapMaterial({
-    //   color: "white",
-    //   matcap: texture,
-    // });
-
     let model = null;
     const gltfLoader = new GLTFLoader();
 
@@ -232,9 +225,6 @@ export class Main {
         model.children[0].children[1].material.color.r = 5;
         model.children[0].children[1].material.color.b = 5;
         model.children[0].children[1].material.color.g = 5;
-        // model.traverse((o) => {
-        //   if (o.isMesh) o.material = whiteMaterial;
-        // });
         sceneInfo.scene.add(model);
       },
       () => {
@@ -247,6 +237,12 @@ export class Main {
 
     return sceneInfo;
   }
+
+  setupScene4() {
+    const sceneInfo = this.makeScene(document.querySelector("#header_model-left"));
+    return sceneInfo;
+  }
+
 
   resizeRendererToDisplaySize(renderer) {
     const canvas = renderer.domElement;
@@ -303,7 +299,7 @@ export class Main {
       if (children.length === 36) {
         for (let i = 0; i < this.data.length; i++) {
           let caracter = this.data[i].modele - 1;
-          // console.log(caracter)
+          children[caracter].children[0].children[1].rotation.y = this.mouseX
 
           if (
             this.scroll > this.data[i].Vie &&
@@ -315,7 +311,8 @@ export class Main {
               y: 0,
               z: 0,
             });
-            this.deathArray.push(this.data[i].Pseudo);
+            this.pseudoDeathArray.push(this.data[i].Pseudo);
+            this.ageDeathArray.push(this.data[i].Vie);
           } else if (
             this.scroll > this.data[i].Vie &&
             this.data[i].Role === "Designer" &&
@@ -327,7 +324,8 @@ export class Main {
               z: 0,
             });
 
-            this.deathArray.push(this.data[i].Pseudo);
+            this.pseudoDeathArray.push(this.data[i].Pseudo);
+            this.ageDeathArray.push(this.data[i].Vie);
           } else if (
             this.scroll < this.data[i].Vie &&
             this.data[i].Role === "Développeur" &&
@@ -338,7 +336,8 @@ export class Main {
               y: 1,
               z: 1,
             });
-            this.deathArray.splice(-1);
+            this.pseudoDeathArray.splice(-1);
+            this.ageDeathArray.splice(-1);
           } else if (
             this.scroll < this.data[i].Vie &&
             this.data[i].Role === "Designer" &&
@@ -349,7 +348,8 @@ export class Main {
               y: 1,
               z: 1,
             });
-            this.deathArray.splice(-1);
+            this.pseudoDeathArray.splice(-1);
+            this.ageDeathArray.splice(-1);
           }
         }
       }
@@ -358,6 +358,7 @@ export class Main {
     //Render des modèles de la présentation
     this.renderSceneInfo(this.sceneInfo2);
     this.renderSceneInfo(this.sceneInfo3);
+    this.renderSceneInfo(this.sceneInfo4);
 
     if (
       this.sceneInfo2.scene.children.length == 2 &&

@@ -13,10 +13,12 @@ const mouseCursor = document.getElementsByClassName("cursor")
 window.addEventListener("mousemove", (e) => {
   mouseCursor[0].style.top = e.pageY + "px"
   mouseCursor[0].style.left = e.pageX + "px"
-  
+  main.mouseRotation(e.pageX)
 })
+// window.addEventListener("scroll", (e) => {
 
-
+//   console.log(window.scrollY)
+// })
 
 //////////////////////////////////////////////////////////////////
 //RECUPERATION DATA
@@ -30,33 +32,44 @@ fetch("/data.json")
 //////////////////////////////////////////////////////////////////
 //KILL FEED
 //////////////////////////////////////////////////////////////////
-let kills = [];
+let pseudos = [];
+let ages = [];
+let kills = []
 
 for (let i = 0; i < 6; i++) {
+  pseudos.push(document.getElementsByClassName(`pseudo_${i + 1}`));
+  ages.push(document.getElementsByClassName(`age_${i + 1}`));
   kills.push(document.getElementsByClassName(`kill_${i + 1}`));
 }
-kills.map((kill) => {
-  kill[0].style.opacity = 0;
+kills.map((pseudo) => {
+  pseudo[0].style.opacity = 0;
 });
 
-const killFeed = (killArray) => {
-  kills.map((kill) => {
-    kill[0].style.opacity = 0;
+const killFeed = (pseudoArray, ageArray) => {
+  kills.map((pseudo) => {
+    pseudo[0].style.opacity = 0;
   });
 
-  if (killArray.length <= 6) {
-    for (let j = 0; j < killArray.length; j++) {
+  if (pseudoArray.length <= 6) {
+    for (let j = 0; j < pseudoArray.length; j++) {
       if(kills[j][0].style.opacity !== 0) {
         console.log()
         kills[j][0].style.opacity = 1;
-        kills[j][0].innerHTML = killArray[j];
+        pseudos[j][0].innerHTML = pseudoArray[j];
+        ages[j][0].innerHTML = `${ageArray[j]} ans`;
       }
       
     }
-  } else if (killArray.length > 6) {
-    kills.map((kill) => (kill[0].style.opacity = 1));
-    for (let k = 0; k < 6; k++) {
-      kills[k][0].innerHTML = killArray[killArray.length - k - 1];
+  } else if (pseudoArray.length > 6) {
+    kills.map((pseudo) => (pseudo[0].style.opacity = 1));
+    let k = 0
+    for (let l = 6; l > 0; l--) {
+      if(k < 6) {
+        console.log(pseudoArray.length - l)
+        pseudos[k][0].innerHTML = pseudoArray[pseudoArray.length - l - 1];
+        ages[k][0].innerHTML = `${ageArray[ageArray.length - l - 1]} ans`;
+        k++
+      }
     }
   }
 };
@@ -70,6 +83,8 @@ for (let i = 0; i < 9; i++) {
     i * 11
   }%`;
 }
+
+
 
 const navProgress = (progress) => {
   document.getElementById("nav_active").style.height = `${Math.floor(
@@ -105,7 +120,7 @@ const tween = gsap.to(".wrapper_content", {
     scrub: true,
     onUpdate: (self) => {
       // console.log(self.progress);
-      killFeed(main.deathList());
+      killFeed(main.deathList("pseudo"), main.deathList("age"));
       main.updateScroll(self.progress);
       navProgress(self.progress);
     },
@@ -114,6 +129,8 @@ const tween = gsap.to(".wrapper_content", {
 //////////////////////////////////////////////////////////////////
 //ROTATION MODELE PRESENTATION
 //////////////////////////////////////////////////////////////////
+
+
 const tweeny = gsap.to(".presentation_wrapper", {
   scrollTrigger: {
     trigger: ".presentation_wrapper",
@@ -121,8 +138,37 @@ const tweeny = gsap.to(".presentation_wrapper", {
     end: "30%",
     scrub: true,
     onUpdate: (self) => {
-      // console.log(self.progress);
       main.updateScroll1(self.progress);
     },
   },
 });
+
+let gradientTop = document.getElementsByClassName("gradient_top")
+let gradientBottom= document.getElementsByClassName("gradient_bottom")
+
+
+const tweeni = gsap.to(".presentation_wrapper", {
+  scrollTrigger: {
+    trigger: ".presentation_wrapper",
+    start: "-100%",
+    end: "90%",
+    scrub: true,
+    onUpdate: (self) => {
+      if(self.progress  > 0.95) {
+        gradientTop[0].style.display = "block"
+      } else {
+        gradientTop[0].style.display = "none"
+      }
+      if(self.progress > 0.35) {
+        gradientBottom[0].style.display = "block"
+      } else {
+        gradientBottom[0].style.display = "none"
+      }
+
+    },
+  },
+});
+
+window.addEventListener('load', (e) => {
+  gradientBottom[0].style.display = "none"
+})
