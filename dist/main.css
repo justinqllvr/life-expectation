@@ -209,7 +209,7 @@ body {
   width: 25vw;
   height: 25vw;
   margin-top: 20vh;
-  background-image: url(assets/images/dd9446f380d4c03328340d7f50891653.png);
+  background-image: url("grille.png");
   background-size: contain;
 }
 
