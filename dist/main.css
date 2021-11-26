@@ -1,18 +1,18 @@
 @font-face {
   font-family: "Playfair-regular";
-  src: url("/static/Font/PlayFair/PlayfairDisplay-Regular.ttf");
+  src: url(assets/fonts/e8e87618ceae52d4e44b576bcaf87751.ttf);
 }
 @font-face {
   font-family: "Raleway-semiBold";
-  src: url("/static/Font/Raleway/Raleway-SemiBold.ttf");
+  src: url(assets/fonts/243af299ad3631bfc36924b497f3831f.ttf);
 }
 @font-face {
   font-family: "Raleway-regular";
-  src: url("/static/Font/Raleway/Raleway-Regular.ttf");
+  src: url(assets/fonts/9ade142e81dd8d55cd3265c1529bef5e.ttf);
 }
 @font-face {
   font-family: "Raleway-medium";
-  src: url("/static/Font/Raleway/Raleway-Medium.ttf");
+  src: url(assets/fonts/1af9f1e9f3fd4766df83e545c2f6fcdb.ttf);
 }
 
 * {
@@ -209,7 +209,7 @@ body {
   width: 25vw;
   height: 25vw;
   margin-top: 20vh;
-  background-image: url("assets/images/dd9446f380d4c03328340d7f50891653.png");
+  background-image: url(assets/images/dd9446f380d4c03328340d7f50891653.png);
   background-size: contain;
 }
 
@@ -458,3 +458,6 @@ body {
   );
   transform: translate(-50%, -50%);
 }
+
+
+/*# sourceMappingURL=main.css.map*/
