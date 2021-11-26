@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { Group, Material, MeshMatcapMaterial, TextureLoader } from "three";
+import gsap from "gsap";
 
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import * as dat from "lil-gui";
@@ -13,7 +14,17 @@ export class Main {
       antialias: true,
     });
     this.scroll = 0;
+    this.scroll1 = 0;
     this.data = null;
+
+    this.numberDevelopper = this.setArrayNumber("developper");
+    this.numberDesigner = this.setArrayNumber("designer");
+
+    this.mouseX = 0;
+
+    this.test = 0;
+
+    this.deathArray = [];
 
     this.gui = new dat.GUI();
     this.caracterFolder = this.gui.addFolder("Caracter");
@@ -31,12 +42,43 @@ export class Main {
     this.scroll = progress * 80 + 20;
   }
 
+  updateScroll1(progress) {
+    this.scroll1 = progress;
+  }
+
+  setArrayNumber(role) {
+    const arrayDevelopper = [];
+    const arrayDesigner = [];
+
+    if (role === "developper") {
+      for (let i = 1; i <= 14; i++) {
+        arrayDevelopper.push(i);
+      }
+      return arrayDevelopper.sort((a, b) => 0.5 - Math.random());
+    } else {
+      for (let i = 15; i <= 36; i++) {
+        arrayDesigner.push(i);
+      }
+      return (this.arrayNumberDesigner = arrayDesigner.sort(
+        (a, b) => 0.5 - Math.random()
+      ));
+    }
+  }
+  deathList() {
+    return this.deathArray;
+  }
   fetchData() {
     fetch("/data.json")
       .then((res) => res.json())
       .then((res) => {
         this.data = res;
-        console.log(this.data);
+
+        for (let i = 0; i < this.numberDevelopper.length; i++) {
+          this.data.filter((person) => person.Role === "Développeur")[i].modele = this.numberDevelopper[i]
+        }
+        for (let i = 0; i < this.numberDesigner.length; i++) {
+          this.data.filter((person) => person.Role === "Designer")[i].modele = this.numberDesigner[i]
+        }
       });
   }
 
@@ -64,7 +106,6 @@ export class Main {
 
   setupScene1() {
     const sceneInfo = this.makeScene(document.querySelector("#box"));
-
 
     let model = null;
     const caracterGroup = new THREE.Group();
@@ -103,12 +144,10 @@ export class Main {
           new_caracter.name = `thoma_${studientNumber}`;
 
           if (studientNumber + 1 < 14) {
-            // console.log("dev : " + studientNumber);
             model.traverse((o) => {
               if (o.isMesh) o.material = newMaterial2;
             });
           } else {
-            // console.log("designer :" + studientNumber);
             model.traverse((o) => {
               if (o.isMesh) o.material = newMaterial1;
             });
@@ -120,14 +159,14 @@ export class Main {
       }
 
       let scale = 1.3;
-      caracterGroup.position.x = -19.863;
-      caracterGroup.position.y = -22.321;
-      caracterGroup.position.z = -50;
+      caracterGroup.position.x = -19.4;
+      caracterGroup.position.y = -21.5;
+      caracterGroup.position.z = -48.2;
       caracterGroup.scale.x = scale;
       caracterGroup.scale.y = scale;
       caracterGroup.scale.z = scale;
 
-      this.caracterFolder.add(caracterGroup.position, "z", -50, 50, 0.001);
+      this.caracterFolder.add(caracterGroup.position, "z", -60, 0, 0.001);
       this.caracterFolder.add(caracterGroup.position, "x", -50, 50, 0.001);
       this.caracterFolder.add(caracterGroup.position, "y", -50, 50, 0.001);
       this.caracterFolder.add(caracterGroup.scale, "x", 1, 2, 0.01);
@@ -136,21 +175,8 @@ export class Main {
 
       // console.log(caracterGroup);
       sceneInfo.scene.add(caracterGroup);
-
-      // var selectedObject = sceneInfo.scene.getObjectByName(caracterGroup.children[5].name)
-
-      // console.log(
-      //   caracterGroup.children.map(
-      //     (child) => child.children[0].children[1].material.opacity
-      //   )
-      // );
     }, 500);
 
-    // const geometry = new THREE.BoxGeometry(1, 1, 1);
-    // const material = new THREE.MeshPhongMaterial({ color: "red" });
-    // const mesh = new THREE.Mesh(geometry, material);
-    // sceneInfo.scene.add(mesh);
-    // console.log(caracterGroup);
     sceneInfo.mesh = caracterGroup;
     return sceneInfo;
   }
@@ -169,6 +195,7 @@ export class Main {
         model = gltf.scene;
         model.position.y = -1.5;
         model.position.z = -3;
+        model.rotation.y = -1;
 
         sceneInfo.scene.add(model);
       },
@@ -269,55 +296,76 @@ export class Main {
     this.renderer.setScissorTest(true);
 
     this.renderSceneInfo(this.sceneInfo1);
+    // console.log(this.developper)
 
     if (this.data && this.sceneInfo1.mesh) {
       const children = this.sceneInfo1.mesh.children;
-      let designer = 14
-      let developper = 0
-
       if (children.length === 36) {
         for (let i = 0; i < this.data.length; i++) {
-          if (this.scroll > this.data[i].Durée_de_vie) {
-            if(this.data[i].Role === "Designer") {
-              children[designer].scale.x = 0;
-              children[designer].scale.y = 0;
-              children[designer].scale.z = 0; 
-              designer++
-            } else if (this.data[i].Role === "Développeur") {
-              children[developper].scale.x = 0;
-              children[developper].scale.y = 0;
-              children[developper].scale.z = 0;
-              developper++
-            }
-            // children[developper].scale.x = 0;
-            // children[developper].scale.y = 0;
-            // children[developper].scale.z = 0;
-            // developper++
-            // this.sceneInfo1.mesh.remove(
-            //   children.filter((child) => child.name === `thoma_${i}`)[0]
-            // );
-          } else if (this.scroll < this.data[i].Durée_de_vie && children[i].scale.x === 0) {
-            if(this.data[i].Role === "Designer") {
-              children[designer].scale.x = 0;
-              children[designer].scale.y = 0;
-              children[designer].scale.z = 0; 
-              designer--
-            } else if (this.data[i].Role === "Développeur") {
-              // console.log("object")
-              children[developper].scale.x = 0;
-              children[developper].scale.y = 0;
-              children[developper].scale.z = 0;
-              developper--
-            }
-            children[i].scale.x = 1
-            children[i].scale.y = 1
-            children[i].scale.z = 1
+          let caracter = this.data[i].modele - 1;
+          // console.log(caracter)
+
+          if (
+            this.scroll > this.data[i].Vie &&
+            this.data[i].Role === "Développeur" &&
+            children[caracter].scale.x === 1
+          ) {
+            gsap.to(children[caracter].scale, {
+              x: 0,
+              y: 0,
+              z: 0,
+            });
+            this.deathArray.push(this.data[i].Pseudo);
+          } else if (
+            this.scroll > this.data[i].Vie &&
+            this.data[i].Role === "Designer" &&
+            children[caracter].scale.x === 1
+          ) {
+            gsap.to(children[caracter].scale, {
+              x: 0,
+              y: 0,
+              z: 0,
+            });
+
+            this.deathArray.push(this.data[i].Pseudo);
+          } else if (
+            this.scroll < this.data[i].Vie &&
+            this.data[i].Role === "Développeur" &&
+            children[caracter].scale.x === 0
+          ) {
+            gsap.to(children[caracter].scale, {
+              x: 1,
+              y: 1,
+              z: 1,
+            });
+            this.deathArray.splice(-1);
+          } else if (
+            this.scroll < this.data[i].Vie &&
+            this.data[i].Role === "Designer" &&
+            children[caracter].scale.x === 0
+          ) {
+            gsap.to(children[caracter].scale, {
+              x: 1,
+              y: 1,
+              z: 1,
+            });
+            this.deathArray.splice(-1);
           }
         }
       }
     }
 
+    //Render des modèles de la présentation
     this.renderSceneInfo(this.sceneInfo2);
+    this.renderSceneInfo(this.sceneInfo3);
+
+    if (
+      this.sceneInfo2.scene.children.length == 2 &&
+      this.sceneInfo3.scene.children.length == 2
+    ) {
+      this.sceneInfo2.scene.children[1].rotation.y = this.scroll1 * 2;
+      this.sceneInfo3.scene.children[1].rotation.y = -this.scroll1 * 1.5;
+    }
     this.renderSceneInfo(this.sceneInfo3);
 
     requestAnimationFrame(this.render);

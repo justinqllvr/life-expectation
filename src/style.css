@@ -15,17 +15,17 @@
   src: url("/static/Font/Raleway/Raleway-Medium.ttf");
 }
 
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  scrollbar-width: none; 
+  scrollbar-width: none;
+  cursor: none;
 
   --main-bg-color: #000000;
   --main-color: #f6f6f6;
   --title-color: #white;
-  --nav-color: #63676D;
+  --nav-color: #63676d;
 }
 
 body::-webkit-scrollbar {
@@ -34,8 +34,16 @@ body::-webkit-scrollbar {
 
 body {
   scrollbar-width: none;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  background-color: #000000;
+}
+
+.all_wrapper {
+  margin: auto;
+  width: 90vw;
+  height: 90vh;
+  border: 1px solid white;
 }
 .header {
   background-color: #000000;
@@ -72,6 +80,8 @@ body {
 }
 .presentation_wrapper {
   height: 100vh;
+  width: 90vw;
+  margin-left: 5vw;
   display: flex;
   flex-direction: column;
   margin-left: 5rem;
@@ -79,21 +89,51 @@ body {
 
 .presentation_wrapper_title {
   font-family: "Playfair-regular";
+  height: 10%;
   font-size: 22px;
 }
 
 .presentation {
   height: 75vh;
-  width: 90%;
+  width: 100%;
   border: 1px solid white;
-  border-radius: 10px;
+  border-radius: 5px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
 }
 
-.caracteristiques-dev, .caracteristiques-design {
+.presentation_name {
+  font-family: "Playfair-regular";
+  font-size: 1.5em;
+  line-height: 2.5em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 3vh;
+  margin-bottom: 1vh;
+}
+
+.square {
+  display: inline-block;
+  border-radius: 5px;
+  width: 2vw;
+  height: 2vw;
+  margin-top: 0.5vw;
+  margin-left: 2vw;
+  background-color: white;
+}
+
+.white {
+  background-color: white;
+}
+.black {
+  background-color: #808080;
+}
+
+.caracteristiques-dev,
+.caracteristiques-design {
   max-width: 15%;
   font-family: "Raleway-semiBold";
   font-size: 1em;
@@ -105,19 +145,20 @@ body {
   align-items: center;
 }
 
-.caracteristiques-dev .line, .caracteristiques-design .line {
+.caracteristiques-dev .line,
+.caracteristiques-design .line {
   height: 5vh;
   width: 1px;
   margin: 1rem;
   background-color: white;
 }
 
-
-.caracter-dev, .caracter-design {
+.caracter-dev,
+.caracter-design {
   display: flex;
   flex-direction: column;
   max-width: 35%;
-  height: 100%
+  height: 100%;
 }
 
 /* WEBGL */
@@ -138,47 +179,42 @@ body {
 
 .grid {
   display: inline-block;
-  width: 30rem;
-  height: 30rem;
+  width: 25vw;
+  height: 25vw;
   margin-top: 20vh;
-  /* background-color: gray; */
-
+  background-image: url("/static/grille.png");
+  background-size: contain;
 }
 
-.black-model, .white-model {
+.black-model,
+.white-model {
   display: inline-block;
-  height: 80%;
+  height: 75%;
   width: 23vw;
   background-color: #151515;
   border: 1px solid #797979;
   border-radius: 5px;
 }
 
-
 /* content */
 .wrapper_content {
   width: 100%;
-  height: 400vh;
+  height: 600vh;
   display: flex;
   background-color: var(--main-bg-color);
 }
 
 .wrapper_page {
   height: 100%;
-  width: 40vw;
+  width: 50%;
   padding: 3rem;
 }
 
-
 .wrapper_canvas {
-  width: 30vw;
+  width: 25%;
   height: 100vh;
   top: 10px;
   position: sticky;
-}
-
-.wrapper_killFeed {
-  width: 15vw;
 }
 
 .page {
@@ -186,27 +222,22 @@ body {
   display: flex;
   flex-direction: column;
   color: var(--main-color);
-  
 }
 
-.page_content{
-  margin-top: 20vh;
+.page_content {
   width: 100%;
-  height: 30vh;
+  max-height: 50%;
 }
-
 
 .page h2 {
   font-family: "Playfair-regular";
-  font-size: 2.5em;
+  font-size: 2.3vw;
   padding-bottom: 2rem;
 }
 
-
-
 .page h3 {
   font-family: "Raleway-semiBold";
-  font-size: 1em;
+  font-size: 0.93vw;
   line-height: 1.5em;
   padding-bottom: 1.5rem;
   letter-spacing: 0.15px;
@@ -214,20 +245,19 @@ body {
 
 .page p {
   font-family: "Raleway-regular";
-  font-size: 1em;
+  font-size: 0.93vw;
   line-height: 1.5em;
   letter-spacing: 0.5px;
 }
 
 .stats {
-  padding: 3rem;
-  width: 100%;
-  height: 100%;
+  height: 50%;
+  margin-top: 10vh;
 }
 
 .stats span {
   font-family: "Raleway-regular";
-  font-size: 1em;
+  font-size: 0.93vw;
   line-height: 1.5em;
   letter-spacing: 0.5px;
 }
@@ -235,7 +265,6 @@ body {
 .stats_text {
   display: flex;
   flex-direction: column;
-  height: 100%;
   justify-content: space-around;
 }
 /* navbar */
@@ -244,12 +273,23 @@ body {
   display: flex;
   justify-content: center;
   height: 50vh;
-  width: 15vw;
+  width: 10%;
   position: sticky;
   margin-top: 25vh;
   top: 25vh;
 }
 
+.ages {
+  color: var(--main-color);
+  font-family: "Raleway-regular";
+  font-size: 0.8em;
+  line-height: 1.2em;
+  letter-spacing: 0.25px;
+  position: absolute;
+  left: 2vw;
+  top: 40%;
+  transform: rotate(-90deg);
+}
 .nav {
   height: 90%;
   width: 2px;
@@ -264,7 +304,7 @@ body {
   transition: 0.5s;
 }
 
-.wrapper_nav .ball  {
+.wrapper_nav .ball {
   position: absolute;
   width: 0.6vw;
   height: 0.6vw;
@@ -285,3 +325,69 @@ body {
   margin-left: 1rem;
   margin-top: -0.2rem;
 }
+
+/* KILLFEED */
+.wrapper_killFeed {
+  width: 15%;
+  height: 50%;
+  position: sticky;
+  top: 7vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.kill {
+  width: 40%;
+  height: 4vh;
+  line-height: 4vh;
+  border-radius: 5px;
+  vertical-align: middle;
+  margin-top: 1rem;
+  padding-left: 0.5rem;
+  font-family: "Raleway-regular";
+  font-size: 1em;
+  background-color: var(--main-color);
+}
+
+.kill_1 {
+  background-color: #aaaaaa;
+  opacity: 0.33;
+  transition: 0.5s;
+}
+.kill_2 {
+  background-color: #aaaaaa;
+  opacity: 0.66;
+  transition: 0.5s;
+}
+.kill_3 {
+  background-color: #aaaaaa;
+  transition: 0.5s;
+}
+.kill_4 {
+  background-color: #aaaaaa;
+  transition: 0.5s;
+}
+.kill_5 {
+  background-color: #aaaaaa;
+  transition: 0.5s;
+}
+.kill_6 {
+  background-color: #aaaaaa;
+  transition: 0.5s;
+}
+
+/* CURSEUR */
+.cursor {
+  width: 3rem;
+  height: 3rem;
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(64, 195, 213, 0.81) 0%,
+    rgba(64, 195, 213, 0) 100%
+  );
+  transform: translate(-50%, -50%);
+}
+

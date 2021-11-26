@@ -1,182 +1,218 @@
 [
   {
     "Pseudo": "ratp",
-    "Durée_de_vie": 32,
-    "Role": "Développeur"
+    "Vie": 32,
+    "Role": "Développeur",
+    "modele": 1
   },
   {
     "Pseudo": "06krtl",
-    "Durée_de_vie": 33,
-    "Role": "Développeur"
+    "Vie": 33,
+    "Role": "Développeur",
+    "modele": 2
   },
   {
     "Pseudo": "bgettedu06",
-    "Durée_de_vie": 33,
-    "Role": "Designer"
+    "Vie": 33,
+    "Role": "Designer",
+    "modele": 15
   },
   {
     "Pseudo": "brakmarledur",
-    "Durée_de_vie": 44,
-    "Role": "Designer"
+    "Vie": 44,
+    "Role": "Designer",
+    "modele": 16
   },
   {
     "Pseudo": "JCVD",
-    "Durée_de_vie": 44,
-    "Role": "Designer"
+    "Vie": 44,
+    "Role": "Designer",
+    "modele": 17
   },
   {
     "Pseudo": "Bourth",
-    "Durée_de_vie": 46,
-    "Role": "Designer"
+    "Vie": 46,
+    "Role": "Designer",
+    "modele": 18
   },
   {
     "Pseudo": "hijgkgkyu",
-    "Durée_de_vie": 46,
-    "Role": "Développeur"
+    "Vie": 46,
+    "Role": "Développeur",
+    "modele": 3
   },
   {
     "Pseudo": "Angry Mouse",
-    "Durée_de_vie": 53,
-    "Role": "Designer"
+    "Vie": 53,
+    "Role": "Designer",
+    "modele": 19
   },
   {
     "Pseudo": "Champion",
-    "Durée_de_vie": 53,
-    "Role": "Développeur"
+    "Vie": 53,
+    "Role": "Développeur",
+    "modele": 4
   },
   {
     "Pseudo": "L'étalon doré",
-    "Durée_de_vie": 54,
-    "Role": "Designer"
+    "Vie": 54,
+    "Role": "Designer",
+    "modele": 20
   },
   {
     "Pseudo": "swoosh",
-    "Durée_de_vie": 56,
-    "Role": "Designer"
+    "Vie": 56,
+    "Role": "Designer",
+    "modele": 21
   },
   {
     "Pseudo": "4x4teinté",
-    "Durée_de_vie": 57,
-    "Role": "Développeur"
+    "Vie": 57,
+    "Role": "Développeur",
+    "modele": 5
   },
   {
     "Pseudo": "xX_PRO_GAMER_35310_Xx",
-    "Durée_de_vie": 57,
-    "Role": "Développeur"
+    "Vie": 57,
+    "Role": "Développeur",
+    "modele": 6
   },
   {
     "Pseudo": "Arles",
-    "Durée_de_vie": 60,
-    "Role": "Designer"
+    "Vie": 60,
+    "Role": "Designer",
+    "modele": 22
   },
   {
     "Pseudo": "plouda",
-    "Durée_de_vie": 61,
-    "Role": "Développeur"
+    "Vie": 61,
+    "Role": "Développeur",
+    "modele": 7
   },
   {
     "Pseudo": "Chips",
-    "Durée_de_vie": 62,
-    "Role": "Développeur"
+    "Vie": 62,
+    "Role": "Développeur",
+    "modele": 8
   },
   {
     "Pseudo": "EraStorm",
-    "Durée_de_vie": 63,
-    "Role": "Développeur"
+    "Vie": 63,
+    "Role": "Développeur",
+    "modele": 9
   },
   {
     "Pseudo": "hokuu",
-    "Durée_de_vie": 64,
-    "Role": "Développeur"
+    "Vie": 64,
+    "Role": "Développeur",
+    "modele": 10
   },
   {
     "Pseudo": "Nemgear",
-    "Durée_de_vie": 65,
-    "Role": "Designer"
+    "Vie": 65,
+    "Role": "Designer",
+    "modele": 23
   },
   {
     "Pseudo": "Claude",
-    "Durée_de_vie": 68,
-    "Role": "Développeur"
+    "Vie": 68,
+    "Role": "Développeur",
+    "modele": 11
   },
   {
     "Pseudo": "GB",
-    "Durée_de_vie": 68,
-    "Role": "Designer"
+    "Vie": 68,
+    "Role": "Designer",
+    "modele": 24
   },
   {
     "Pseudo": "splum",
-    "Durée_de_vie": 69,
-    "Role": "Designer"
+    "Vie": 69,
+    "Role": "Designer",
+    "modele": 25
   },
   {
     "Pseudo": "ss",
-    "Durée_de_vie": 69,
-    "Role": "Designer"
+    "Vie": 69,
+    "Role": "Designer",
+    "modele": 26
   },
   {
     "Pseudo": "Marion Laura",
-    "Durée_de_vie": 70,
-    "Role": "Designer"
+    "Vie": 70,
+    "Role": "Designer",
+    "modele": 27
   },
   {
     "Pseudo": "muffin",
-    "Durée_de_vie": 72,
-    "Role": "Designer"
+    "Vie": 72,
+    "Role": "Designer",
+    "modele": 28
   },
   {
     "Pseudo": "Dunkin",
-    "Durée_de_vie": 74,
-    "Role": "Développeur"
+    "Vie": 74,
+    "Role": "Développeur",
+    "modele": 12
   },
   {
     "Pseudo": "La Babouche",
-    "Durée_de_vie": 74,
-    "Role": "Designer"
+    "Vie": 74,
+    "Role": "Designer",
+    "modele": 29
   },
   {
     "Pseudo": "Lama",
-    "Durée_de_vie": 74,
-    "Role": "Développeur"
+    "Vie": 74,
+    "Role": "Développeur",
+    "modele": 13
   },
   {
     "Pseudo": "Blad",
-    "Durée_de_vie": 76,
-    "Role": "Designer"
+    "Vie": 76,
+    "Role": "Designer",
+    "modele": 30
   },
   {
     "Pseudo": "Mambo",
-    "Durée_de_vie": 77,
-    "Role": "Développeur"
+    "Vie": 77,
+    "Role": "Développeur",
+    "modele": 14
   },
   {
     "Pseudo": "Jacki",
-    "Durée_de_vie": 78,
-    "Role": "Designer"
+    "Vie": 78,
+    "Role": "Designer",
+    "modele": 31
   },
   {
     "Pseudo": "nsh",
-    "Durée_de_vie": 80,
-    "Role": "Designer"
+    "Vie": 80,
+    "Role": "Designer",
+    "modele": 32
   },
   {
     "Pseudo": "sisi soukalie",
-    "Durée_de_vie": 81,
-    "Role": "Designer"
+    "Vie": 81,
+    "Role": "Designer",
+    "modele": 33
   },
   {
     "Pseudo": "veau",
-    "Durée_de_vie": 82,
-    "Role": "Designer"
+    "Vie": 82,
+    "Role": "Designer",
+    "modele": 34
   },
   {
     "Pseudo": "Youhou",
-    "Durée_de_vie": 86,
-    "Role": "Designer"
+    "Vie": 86,
+    "Role": "Designer",
+    "modele": 35
   },
   {
     "Pseudo": "mlc",
-    "Durée_de_vie": 94,
-    "Role": "Designer"
+    "Vie": 94,
+    "Role": "Designer",
+    "modele": 36
   }
 ]

@@ -8,8 +8,11 @@
 </head>
 
 <body>
-    <canvas id="webgl"></canvas>
 
+    <!-- <div class="all_wrapper">
+
+    </div> -->
+    <div class="cursor"></div>
     <div class="header">
         <div class="title_header">
             <div class="gob">
@@ -21,7 +24,7 @@
                 <h2>Expected lifetime of a BDDI</h2>
             </div>
         </div>
-        
+
         <div class="presentation_wrapper">
             <div class="presentation_wrapper_title">Life expectations: Expected lifetime of a BDDI</div>
             <div class="presentation">
@@ -35,13 +38,17 @@
                     <span>0 NON-BINAIRES</span>
                 </div>
                 <div class="caracter-dev">
-                    <span>Developper</span>
-                    <span>carrés chelous</span>
+                    <div class="presentation_name">
+                        <span>Developper</span>
+                        <span class="square black"></span>
+                    </div>
                     <span id="black-model" class="black-model"></span>
                 </div>
                 <div class="caracter-design">
-                    <span>Designer</span>
-                    <span>3 carrés ? </span>
+                    <div class="presentation_name">
+                        <span>Designer</span>
+                        <span class="square white"></span>
+                    </div>
                     <span id="white-model" class="white-model"></span>
                 </div>
                 <div class="caracteristiques-design">
@@ -59,6 +66,7 @@
     </div>
     <div class="wrapper_content">
         <div class="wrapper_nav">
+            <span class="ages">AGES</span>
             <div class="nav">
                 <div id="nav_active" class="nav_active"></div>
             </div>
@@ -74,7 +82,6 @@
                 <span class="nav_mark-8_text">100</span>
             </div>
 
-
             <span class="ball nav_mark-0"></span>
             <span class="ball nav_mark-1"></span>
             <span class="ball nav_mark-2"></span>
@@ -85,86 +92,121 @@
             <span class="ball nav_mark-7"></span>
             <span class="ball nav_mark-8"></span>
 
-
         </div>
         <div class="wrapper_page">
             <div class="page page1">
                 <div class="page_content">
-                    <h2>Châpitre 1: Un nouveau départ</h2>
+                    <h2>Châpitre 1 : Un Nouveau Départ</h2>
                     <h3>L'APPARTEMENT</h3>
-                    <p>Votre bac en poche, vous êtes passez dans les études supérieures avec l’affectation dans l’école
-                        de vos reves. Il ne vous manquait plus que l’appartement, tant attendu. Dans celui-ci, les fêtes
-                        les plus mémorables de votre vie ont lieu. Vous êtes jeunes, vous avez une hygiène de vie plus
-                        ou moins douteuse, mais vous vous en sortez très bien, enfin, pour l’instant...Pour votre
-                        information, selon le sondage bddeath du lundi 22 novembre: </p>
+                    <p>Votre bac en poche, vous êtes passé dans les études supérieures. Affecté dans l’établissement de
+                        vos rêves, il ne vous manquait plus que l’appartement, tant attendu.
+                        Dans celui-ci, les fêtes les plus mémorables de votre vie auront lieu. Vous êtes jeunes, vous
+                        avez une hygiène de vie plus ou moins douteuse, mais vous vous en sortez très bien, enfin, pour
+                        l’instant...
+                    </p>
 
                 </div>
                 <div class="stats">
                     <div class="stats_text">
-                        <span>31% portent des chaussettes colorées</span>
+                        <span>31% consomment drogue dont 45% quotidiennement.s</span>
                         <span>33% fumeurs dont 75% quotidiennement</span>
-                        <span>58% font moins d’une heure de sport par semaine</span>
+                        <span>67% boivent de l’alcool</span>
                     </div>
-                    <!-- <img src=""/> -->
+                    <!-- <img src="chap_01.png"/> -->
                 </div>
             </div>
 
             <div class="page page2">
                 <div class="page_content">
-                    <h2>Châpitre 2: Un nouveau départ</h2>
-                    <h3>L'APPARTEMENT</h3>
-                    <p>Votre bac en poche, vous êtes passez dans les études supérieures avec l’affectation dans l’école
-                        de vos reves. Il ne vous manquait plus que l’appartement, tant attendu. Dans celui-ci, les fêtes
-                        les plus mémorables de votre vie ont lieu. Vous êtes jeunes, vous avez une hygiène de vie plus
-                        ou moins douteuse, mais vous vous en sortez très bien, enfin, pour l’instant...Pour votre
-                        information, selon le sondage bddeath du lundi 22 novembre: </p>
-
+                    <h2>Châpitre 2 : La Vie Active</h2>
+                    <h3>LA VRAIE VIE</h3>
+                    <p>Les habitudes de certains auront déjà eu raison d’eux. 10% des BBDI ne découvriront pas la vie
+                        active, car 90% des BDDI ne mangent pas assez de légumes, 40% consomment trop de fast-food et
+                        36% boivent des sodas trop fréquemment. Dommage...
+                    </p>
                 </div>
                 <div class="stats">
                     <div class="stats_text">
-                        <span>31% portent des chaussettes colorées</span>
-                        <span>33% fumeurs dont 75% quotidiennement</span>
-                        <span>58% font moins d’une heure de sport par semaine</span>
+                        <span>1 personnes mange au moins 5 fruits & legumes par jour</span>
+                        <span>83% vont au fast food au moins une fois par semaine</span>
+                        <span>36% boivent du soda quotidiennement</span>
                     </div>
                     <!-- <img src=""/> -->
                 </div>
             </div>
             <div class="page page3">
                 <div class="page_content">
-                    <h2>Châpitre 3: Un nouveau départ</h2>
-                    <h3>L'APPARTEMENT</h3>
-                    <p>Votre bac en poche, vous êtes passez dans les études supérieures avec l’affectation dans l’école
-                        de vos reves. Il ne vous manquait plus que l’appartement, tant attendu. Dans celui-ci, les fêtes
-                        les plus mémorables de votre vie ont lieu. Vous êtes jeunes, vous avez une hygiène de vie plus
-                        ou moins douteuse, mais vous vous en sortez très bien, enfin, pour l’instant...Pour votre
-                        information, selon le sondage bddeath du lundi 22 novembre: </p>
-
+                    <h2>Châpitre 3 : Le Mariage</h2>
+                    <h3>VOTRE GRAND JOUR</h3>
+                    <p>Vous trouverez votre moitié, celle avec qui vous allez passer le restant de vos jours.
+                        Vous lui promettrez fidélité et amour. Il s’agira du plus beau jour de votre vie, tout votre
+                        entourage sera là, ils seront heureux pour vous. Cet événement ne sera malheureusement pas vécu
+                        par tous, leurs mauvaises habitudes auront raison d’eux. Cela, notamment dû au fait que parmi
+                        les BDDI, trop ne dorment pas assez. Votre manque de sommeil à réduit votre espérance de vie de
+                        20 ans, en plus de vos autres déboires.
+                    </p>
                 </div>
                 <div class="stats">
                     <div class="stats_text">
-                        <span>31% portent des chaussettes colorées</span>
-                        <span>33% fumeurs dont 75% quotidiennement</span>
-                        <span>58% font moins d’une heure de sport par semaine</span>
+                        <span>12% dorment plus que le minimum recommandé</span>
+                        <span>14% sont insomniaques</span>
                     </div>
                     <!-- <img src=""/> -->
                 </div>
             </div>
             <div class="page page4">
                 <div class="page_content">
-                    <h2>Châpitre 4: Un nouveau départ</h2>
-                    <h3>L'APPARTEMENT</h3>
+                    <h2>Châpitre 4 : Les Enfants</h2>
+                    <h3>ILS SONT LÀ</h3>
+                    <p>Vous les attendrez, ou pas, mais ils arriveront. Fraichement marié, 2 enfants feront leur
+                        apparition dans vos vies, à 2 ans d’intervalle... du moins, pour certains. Cela notamment est dû
+                        au fait que le BBDI moyen passe 9h08 pour jours devant un ecran, il est recommendé de ne pas
+                        depasser les 3h par jour..
+                    </p>
+                </div>
+                <div class="stats">
+                    <div class="stats_text">
+                        <span>Le BDDI passe en moyenne 9h08/jour devant un écran</span>
+                    </div>
+                    <!-- <img src=""/> -->
+                </div>
+            </div>
+            <div class="page page5">
+                <div class="page_content">
+                    <h2>Châpitre 5: La Retraite</h2>
+                    <h3>UN REPOS BIEN MÉRITÉ</h3>
                     <p>Votre bac en poche, vous êtes passez dans les études supérieures avec l’affectation dans l’école
                         de vos reves. Il ne vous manquait plus que l’appartement, tant attendu. Dans celui-ci, les fêtes
                         les plus mémorables de votre vie ont lieu. Vous êtes jeunes, vous avez une hygiène de vie plus
                         ou moins douteuse, mais vous vous en sortez très bien, enfin, pour l’instant...Pour votre
-                        information, selon le sondage bddeath du lundi 22 novembre: </p>
+                        information, selon le sondage bddeath du lundi 22 novembre: 
+                    </p>
 
                 </div>
                 <div class="stats">
                     <div class="stats_text">
-                        <span>31% portent des chaussettes colorées</span>
-                        <span>33% fumeurs dont 75% quotidiennement</span>
-                        <span>58% font moins d’une heure de sport par semaine</span>
+                        <span>31% sont en couple</span>
+                        <span>12 amis en moyennes</span>
+                    </div>
+                    <!-- <img src=""/> -->
+                </div>
+            </div>
+            <div class="page page6">
+                <div class="page_content">
+                    <h2>Châpitre 6: Les Petits Enfants</h2>
+                    <h3>CHARLIE EST NÉE</h3>
+                    <p>Le deuxième plus beau jour de votre vie : votre belle-fille à accoucher d’une petite Charlie, née
+                        dans des conditions parfaites, l’enfant se portera à merveille. Le plus beau bébé de sa
+                        génération. Malheureusement, XX% des BDDI; ne connaîtront pas leur petit enfant, les mauvaises
+                        habitudes vous auront tué. XX% des BDDI ont peur de la mort, cette peur vous aura provoqué un
+                        stress chronique qui à réduit votre espérance de vie. Un conseil : de stresser.
+                    </p>
+
+                </div>
+                <div class="stats">
+                    <div class="stats_text">
+                        <span>47% ont peur de la mort</span>
+                        <span>31% portent des chaussettes colorées.</span>
                     </div>
                     <!-- <img src=""/> -->
                 </div>
@@ -174,19 +216,18 @@
             <span id="box" class="grid">
             </span>
         </div>
-        <div class="wrapper_killFeed">NOMS DES MORTS</div>
+        <div class="wrapper_killFeed">
+            <span class="kill kill_1"></span>
+            <span class="kill kill_2"></span>
+            <span class="kill kill_3"></span>
+            <span class="kill kill_4"></span>
+            <span class="kill kill_5"></span>
+            <span class="kill kill_6"></span>
+        </div>
     </div>
 
-    <div class="container">
-        
-        <!-- <div class="elem" style="background-color: aquamarine;" id="graph">
-            <button>BOUTON</button>
-            <span id="pyramid" class="diagram right"></span>
-        </div>
-        <div class="elem">
-            <span id="sphere" class="diagram middle"></span>
-        </div> -->
-    </div>
+    <canvas id="webgl"></canvas>
+
 </body>
 <script type="module" src="./script.js"></script>
 
